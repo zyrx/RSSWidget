@@ -26,17 +26,18 @@
 	rsswidget_target = "_blank";
 	rsswidget_border = false;
 	rsswidget_title = false;
-	rsswidget_title_name ="e-consulta";
+	rsswidget_title_name ="Title - RSS Widget Demo";
 	rsswidget_footer = false; 
-	rsswidget_footer_name = "rss feed";
+	rsswidget_footer_name = "Footer - RSS Widget Demo";
+	rsswidget_item_link = true;
 	rsswidget_item_title_length = 50;
-	rsswidget_item_date = false;
-	rsswidget_item_description = false; 
+	rsswidget_item_date = true;
+	rsswidget_item_description = true; 
 	rsswidget_item_description_length = 240; 
 	rsswidget_item_description_tag = false;
 	rsswidget_item_source_icon= false;
-	rsswidget_no_items="0";
-	rsswidget_cache = false;
+	rsswidget_no_items=0;
+	rsswidget_cache = true;
 	rsswidget_cache_duration = 300;
 //--> 
 </script>

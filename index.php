@@ -11,31 +11,33 @@
 define('_ZRXEXEC', 1);
 define('DS', DIRECTORY_SEPARATOR);
 define('RSSW_PATH_BASE', dirname(__FILE__));
+setlocale( LC_ALL, 'es_MX' );
 
-require_once('lib/simplepie/autoloader.php');
 require_once('lib/helper.php');
 
-RSSWidget::validateInput( 'http://www.e-consulta.com' );
+// Validates params or redirects to the given url
+RSSWidget::validateInput( 'http://www.example.com' );
+$params = RSSWidget::getParams( $_GET['rsswidget'] );
 
-$filter = new ZFilter();
-$params = $filter->sanitize( $_GET['rsswidget'] );
-$params = $filter->run( $params );
-if( !$params ) die( $filter->get_readable_errors( true ) );
-
-$feed = new SimplePie();
-$feed->set_feed_url( $params['url'] );
+$feed = new RSSWidget();
+$feed->set_feed_url( $params->url );
 
 //Enable caching
-if( $params['cache'] )
-{
-	$duration = $params['cache_duration'];
+if( $params->cache ) {
+	$duration = $params->cache_duration;
 	if( $duration < 0 || $duration > 3600 ) $duration = 1800;
-	$feed->enable_cache(true);
+	$feed->enable_cache( true );
 	$feed->set_cache_location( 'cache' );
 	$feed->set_cache_duration( $duration );
+} else {
+	$feed->enable_cache( false );
 }
 
 $feed->init();
 $feed->handle_content_type();
 
-require RSSWidget::getLayoutPath( $params['template'] );
+if( !empty( $feed ) && $items = $feed->get_items() ) {
+	require RSSWidget::getLayout( $params->template );
+} else {
+	echo RSSWidget::reportError();
+}
