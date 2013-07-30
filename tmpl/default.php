@@ -16,9 +16,13 @@ defined('_ZRXEXEC') or die;
 <meta name="author" content="Lech H. Conde">
 <meta charset="UTF-8">
 <title><?php echo $params->title ? $params->title_name : 'RSS Widget';?></title>
+<link rel="stylesheet" href="tmpl/css/default.css" type="text/css" />
 <?php if( !empty( $params->css_url ) ): ?>
 <link rel="stylesheet" href="<?php echo $params->css_url; ?>" type="text/css" />
 <?php endif; ?>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
+<script type='text/javascript' src='tmpl/js/default.js'></script>
+<script type="text/javascript">function InitFeed(){ CalculateContentHeight(); initAutoScroll(8); }</script>
 </head>
 <body>
 
