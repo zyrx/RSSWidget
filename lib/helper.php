@@ -3,7 +3,7 @@
  * @package		RSSWidget
  * @subpackage	helper
  * @author		Lech H. Conde <lech@zyrx.com.mx>
- * @copyright	Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (c) 2013 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 3 or later; see LICENSE.txt
  */
 
