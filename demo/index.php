@@ -14,31 +14,54 @@
 </head>
 <body>
 <script type="text/javascript"> 
-<!-- 
-	rsswidget_url = "http://e-consulta.com/puebla/feed";
-	rsswidget_css_url = "http://e-consulta.com/sites/all/themes/econsulta/css/widget.css";
-	rsswidget_template = "default";
-	rsswidget_frame_width = 960; 
-	rsswidget_frame_height = 1024;
-	rsswidget_scroll = true;
-	rsswidget_scroll_step = 8;
-	rsswidget_scroll_bar = true;
-	rsswidget_target = "_blank";
-	rsswidget_border = false;
-	rsswidget_title_name ="Title - RSS Widget Demo";
-	rsswidget_footer = false; 
-	rsswidget_footer_name = "Footer - RSS Widget Demo";
-	rsswidget_item_link = true;
-	rsswidget_item_title_length = 50;
-	rsswidget_item_date = true;
-	rsswidget_item_description = true; 
-	rsswidget_item_description_length = 240; 
-	rsswidget_item_description_tag = false;
-	rsswidget_item_source_icon= false;
-	rsswidget_no_items=0;
-	rsswidget_cache = true;
-	rsswidget_cache_duration = 300;
-//--> 
+	var params = {
+		'url'						:	'http://www.e-consulta.com/puebla/feed',
+		'css_url'					:	'http://e-consulta.com/sites/all/themes/econsulta/css/widget.css',
+		'template'					:	'default',
+		'name'						:	'rsswidget',
+		'width'						:	400,
+	    'height'					:	500,
+	    'seamless'					:	false,
+	    'scroll_step'				:	8,
+	    'target'					:	'_blank',
+		'cache'						:	false,
+		'cache_duration'			:	400,
+		
+	//feed
+		'feed_title'				:	true,
+		'feed_link'					:	true,
+		'feed_description'			:	false,
+		'feed_language'				:	false,
+		'feed_copyright'			:	false,
+		'feed_managingEditor'		:	false,
+		'feed_webMaster'			:	false,
+		'feed_pubDate'				:	false,
+		'feed_lastBuildDate'		:	false,
+		'feed_category'				:	false,
+		'feed_generator'			:	false,
+		'feed_docs'					:	false,
+		'feed_cloud'				:	false,
+		'feed_ttl'					:	false,
+		'feed_image'				:	false,
+		'feed_textInput'			:	false,
+		'feed_skipHours'			:	false,
+		'feed_custom_title'			:	'',
+		'feed_custom_link'			:	'',
+		
+	// item
+		'item_title'				:	false,
+		'item_title_length'			:	0,
+		'item_link'					:	true,
+		'item_description'			:	true,
+		'item_description_length'	:	200,
+		'item_author'				:	true,
+		'item_category'				:	true,
+		'item_comments'				:	true,
+		'item_enclosure'			:	true,
+		'item_guid'					:	true,
+		'item_pubDate'				:	false,
+		'item_source'				:	true,
+	};
 </script>
 <script type="text/javascript" src="../js/rsswidget.js"></script>
 </body>
