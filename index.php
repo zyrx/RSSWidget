@@ -12,12 +12,14 @@ define('_ZRXEXEC', 1);
 define('DS', DIRECTORY_SEPARATOR);
 define('RSSW_PATH_BASE', dirname(__FILE__));
 setlocale( LC_ALL, 'es_MX' );
+define('RSSW_ARRAY_PARAMS', 'rssw');
+define('RSSW_REDIRECT', 'http://www.example.com');
 
 require_once('lib/helper.php');
-
+//echo '<pre>';var_dump($_REQUEST[RSSW_ARRAY_PARAMS]); echo '</pre>';die();
 // Validates params or redirects to the given url
-RSSWidget::validateInput( 'http://www.example.com' );
-$params = RSSWidget::getParams( $_GET['rsswidget'] );
+RSSWidget::validateInput( RSSW_ARRAY_PARAMS, RSSW_REDIRECT );
+$params = RSSWidget::getParams( RSSW_ARRAY_PARAMS );
 
 $feed = new RSSWidget();
 $feed->set_feed_url( $params->url );

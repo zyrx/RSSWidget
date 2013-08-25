@@ -14,25 +14,25 @@ require_once('simplepie/autoloader.php');
 class RSSWidget extends SimplePie
 {
 	public static function getParams( $params ){
-		if( is_array( $params ) && class_exists( 'ZFilter' ) )
+		if( is_array( $data = $_REQUEST[$params] ) && class_exists( 'ZFilter' ) )
 		{
 			$filter = new ZFilter();
-			$params = $filter->sanitize( $params );
-			$params = $filter->xss_clean( $params );
-			$params = $filter->run( $params );
+			$data = $filter->sanitize( $data );
+			$data = $filter->xss_clean( $data );
+			$data = $filter->run( $data );
 			
-			if( empty( $params ) )
+			if( empty( $data ) )
 				die( $filter->get_readable_errors( true ) );				
 			
-			return json_decode(json_encode( $params ), FALSE);
+			return json_decode(json_encode( $data ), FALSE);
 		}
 		
 		return null;
 	}
 	
-	public static function validateInput( $url  )
+	public static function validateInput( $params, $url  )
 	{
-		if( empty( $_GET ) || empty( $_GET['rsswidget'] ) )
+		if( empty( $_REQUEST ) || empty( $_REQUEST[$params] ) )
 		{
 			header( 'Location: ' . $url );
 			die();
@@ -62,33 +62,62 @@ class RSSWidget extends SimplePie
 
 require("gump.class.php");
 class ZFilter extends GUMP
-{
-	protected $validation_rules = array(
+{	
+	protected $params = array(
 		'url'						=>	'required|valid_url',
 		'css_url'					=>	'valid_url',
 		'template'					=>	'required|alpha_dash',
-		'frame_width'				=>	'integer',
-	    'frame_height'				=>	'integer',
-	    'scroll'					=>	'boolean',
+		'name'						=>	'alpha_numeric',
+		'width'						=>	'required|integer',
+	    'height'					=>	'required|integer',
+		'seamless'					=>	'boolean',
 	    'scroll_step'				=>	'integer',
-		'scroll_bar'				=>	'boolean',
 	    'target'					=>	'contains,_self _blank',
-	    'border'					=>	'boolean',
-	    'title'						=>	'required|boolean',
-	    'title_name'				=>	'valid_name',
-	    'footer'					=>	'required|boolean',
-	    'footer_name'				=>	'valid_name',
-		'item_link'					=>	'required|boolean',
-		'item_title_length'			=>	'integer',
-		'item_date'					=>	'required|boolean',
-		'item_description'			=>	'required|boolean',
-		'item_description_length'	=>	'integer',
-		'item_description_tag'		=>	'required|boolean',
-		'item_source_icon'			=>	'required|boolean',
-		'no_items'					=>	'integer',
 		'cache'						=>	'required|boolean',
 		'cache_duration'			=>	'integer'
 	);
+	
+	protected $feed = array (
+		'feed_title'					=>	'boolean',
+		'feed_link'						=>	'boolean',
+		'feed_description'				=>	'boolean',
+		'feed_language'					=>	'boolean',
+		'feed_copyright'				=>	'boolean',
+		'feed_managingEditor'			=>	'boolean',
+		'feed_webMaster'				=>	'boolean',
+		'feed_pubDate'					=>	'boolean',
+		'feed_lastBuildDate'			=>	'boolean',
+		'feed_category'					=>	'boolean',
+		'feed_generator'				=>	'boolean',
+		'feed_docs'						=>	'boolean',
+		'feed_cloud'					=>	'boolean',
+		'feed_ttl'						=>	'boolean',
+		'feed_image'					=>	'boolean',
+		'feed_textInput'				=>	'boolean',
+		'feed_skipHours'				=>	'boolean',
+		'feed_custom_title'				=>	'valid_name',
+		'feed_custom_link'				=>	'valid_url',
+	);
+	
+	protected $item = array (
+		'item_title'					=>	'boolean',
+		'item_title_length'				=>	'integer',
+		'item_link'						=>	'boolean',
+		'item_description'				=>	'boolean',
+		'item_description_length'		=>	'integer',
+		'item_author'					=>	'boolean',
+		'item_category'					=>	'boolean',
+		'item_comments'					=>	'boolean',
+		'item_enclosure'				=>	'boolean',
+		'item_guid'						=>	'boolean',
+		'item_pubDate'					=>	'boolean',
+		'item_source'					=>	'boolean',
+	);
+	
+	/**
+	 * Class Constructor
+	 */
+	function __construct(){ $this->validation_rules = array_merge( $this->params, $this->feed, $this->item ); }
 	
 	/**
 	 * Perform data validation against the provided ruleset

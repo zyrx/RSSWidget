@@ -25,7 +25,6 @@
 	rsswidget_scroll_bar = true;
 	rsswidget_target = "_blank";
 	rsswidget_border = false;
-	rsswidget_title = false;
 	rsswidget_title_name ="Title - RSS Widget Demo";
 	rsswidget_footer = false; 
 	rsswidget_footer_name = "Footer - RSS Widget Demo";
